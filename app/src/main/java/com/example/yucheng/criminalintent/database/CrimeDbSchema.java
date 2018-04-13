@@ -1,4 +1,4 @@
-package com.example.yucheng.criminalintent;
+package com.example.yucheng.criminalintent.database;
 
 /**
  * Created by yucheng on 2018/4/11.

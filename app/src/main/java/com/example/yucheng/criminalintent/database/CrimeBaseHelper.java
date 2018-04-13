@@ -1,10 +1,8 @@
-package com.example.yucheng.criminalintent;
+package com.example.yucheng.criminalintent.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.example.yucheng.criminalintent.CrimeDbSchema.CrimeTable;
 
 
 /**
@@ -21,13 +19,13 @@ public class CrimeBaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + CrimeTable.NAME + "(" +
+        db.execSQL("create table " + CrimeDbSchema.CrimeTable.NAME + "(" +
                 " _id integer primary key autoincrement, " +
-                CrimeTable.Cols.UUID + ", " +
-                CrimeTable.Cols.TITLE + ", "
-                + CrimeTable.Cols.DATE + ", " +
-                CrimeTable.Cols.SOLVED + ", "
-                + CrimeTable.Cols.SUSPECT + ")");
+                CrimeDbSchema.CrimeTable.Cols.UUID + ", " +
+                CrimeDbSchema.CrimeTable.Cols.TITLE + ", "
+                + CrimeDbSchema.CrimeTable.Cols.DATE + ", " +
+                CrimeDbSchema.CrimeTable.Cols.SOLVED + ", "
+                + CrimeDbSchema.CrimeTable.Cols.SUSPECT + ")");
     }
 
     @Override

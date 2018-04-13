@@ -5,7 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.yucheng.criminalintent.CrimeDbSchema.CrimeTable;
+import com.example.yucheng.criminalintent.database.CrimeBaseHelper;
+import com.example.yucheng.criminalintent.database.CrimeCursorWrapper;
+import com.example.yucheng.criminalintent.database.CrimeDbSchema.CrimeTable;
+import com.example.yucheng.criminalintent.database.CrimeDbSchema.CrimeTable.Cols;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -64,7 +67,7 @@ public class CrimeLab {
 
     public Crime getCrime(UUID id) {
 
-        CrimeCursorWrapper cursor = queryCrimes(CrimeTable.Cols.UUID + "= ?",
+        CrimeCursorWrapper cursor = queryCrimes(Cols.UUID + "= ?",
                 new String[] {id.toString()});
 
         try {
@@ -88,7 +91,8 @@ public class CrimeLab {
         String uuidString = crime.getId().toString();
         ContentValues values = getContentValues(crime);
 
-        mDatabase.update(CrimeTable.NAME, values, CrimeTable.Cols.UUID + "= ?", new String[] { uuidString});
+        mDatabase.update(CrimeTable.NAME, values,
+                Cols.UUID + "= ?", new String[] { uuidString});
     }
 
     public void addCrime(Crime c) {
@@ -99,11 +103,11 @@ public class CrimeLab {
 
     private static ContentValues getContentValues(Crime crime) {
         ContentValues values = new ContentValues();
-        values.put(CrimeTable.Cols.UUID, crime.getId().toString());
-        values.put(CrimeTable.Cols.TITLE, crime.getTitle());
-        values.put(CrimeTable.Cols.DATE, crime.getDate().toString());
-        values.put(CrimeTable.Cols.SOLVED, crime.isSolved() ? 1 : 0);
-        values.put(CrimeTable.Cols.SUSPECT, crime.getSuspect());
+        values.put(Cols.UUID, crime.getId().toString());
+        values.put(Cols.TITLE, crime.getTitle());
+        values.put(Cols.DATE, crime.getDate().getTime());
+        values.put(Cols.SOLVED, crime.isSolved() ? 1 : 0);
+        values.put(Cols.SUSPECT, crime.getSuspect());
 
         return values;
     }
